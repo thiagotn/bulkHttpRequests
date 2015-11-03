@@ -4,25 +4,45 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
 public class BulkHttpRequests {
 
-    public static void main(String[] args) {
-        if (args == null) throw new IllegalArgumentException("Input name of the file");
+    private static final File DEFAULT_FILE = new File("requests");
+    private static Log log = Log.getInstance(true);
 
-        File file = new File(args[0]);
-        if (!file.exists()) throw new IllegalArgumentException("Invalid file");
+    public static void main(String[] args) throws IOException {
+        log.info("Iniciando processo.");
+        if (args.length != 1) {
+            log.info("Utilizando arquivo default: " + DEFAULT_FILE.getAbsolutePath());
+            execute(DEFAULT_FILE);
+        } else {
+            File file = new File(args[0]);
+            log.info("Utilizando arquivo: " + file.getAbsolutePath());
+            execute(file);
+        }
+        log.info("Finalizando processo.");
+        log.close();
+    }
 
+    private static void execute(File file) throws IOException {
         try {
             List<String> lines = Files.readLines(file, Charsets.UTF_8);
+            int l = 0;
+            log.info("Total de " + lines.size() + " linha(s) para ser(em) processada(s).");
             for (String url : lines) {
-                new HttpClientUtil().executeMethodGet(url);
+                l++;
+                if (StringUtils.isEmpty(url)) {
+                    log.info("Linha: " + l + " ignorada.");
+                } else {
+                    new HttpClientUtil().executeMethodGet(url);
+                }
             }
-
         } catch (IOException e) {
-            System.out.println("Error when trying to readLines: " + e.getMessage());
+            log.info("Erro ao tentar ler as linhas: " + e.getMessage());
         }
     }
 }

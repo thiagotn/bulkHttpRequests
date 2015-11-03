@@ -1,1 +1,1 @@
-java -jar target/bulkHttpRequests-jar-with-dependencies.jar %1
+java -jar ./target/bulkHttpRequests-jar-with-dependencies.jar %1

@@ -13,6 +13,8 @@ import com.google.common.base.Charsets;
 
 public class HttpClientUtil {
 
+    private static Log log = Log.getInstance(true);
+
     public void executeMethodGet(String url) throws URIException, NullPointerException {
         URI uri = new URI(url, false, Charsets.UTF_8.toString());
         HttpClient client = new HttpClient();
@@ -24,9 +26,9 @@ public class HttpClientUtil {
         try {
             statusCode = client.executeMethod(method);
             responseBodyAsStream = method.getResponseBodyAsStream();
-            new Log().generate(url, responseBodyAsStream, statusCode);
+            Log.getInstance().generate(url, responseBodyAsStream, statusCode);
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            log.info("Erro: " + e.getMessage());
             e.printStackTrace();
         } finally {
             // Release the connection.
