@@ -15,3 +15,6 @@ Exemplo
 2 - Executar:
 
 	./bulkHttpRequests.sh
+
+
+3 - Visualizar resultados em /output
