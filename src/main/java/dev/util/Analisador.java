@@ -16,15 +16,15 @@ public class Analisador {
     }
 
     private void analisar() throws IOException {
-        Set<Long> inscriptionsPlataforma = fileToSet(new File("analise-inscriptions-office365\\inscriptions-plataforma.txt"));
-        Set<Long> inscriptionsOffice365 = fileToSet(new File("analise-inscriptions-office365\\inscriptions-base-office365.txt"));
+        Set<Long> inscriptionsPlataforma = fileToSet(new File("analise-inscriptions-office365" + File.separator + "inscriptions-plataforma.txt"));
+        Set<Long> inscriptionsOffice365 = fileToSet(new File("analise-inscriptions-office365" + File.separator + "inscriptions-base-office365.txt"));
         Set<Long> inscriptionsForaDaBaseOffice365 = new HashSet<Long>();
         for (Long inscription : inscriptionsPlataforma) {
            if (!inscriptionsOffice365.contains(inscription)) {
                inscriptionsForaDaBaseOffice365.add(inscription);
            }
         }
-        Log.getInstance().generate(buildContent(inscriptionsForaDaBaseOffice365), "analise-inscriptions-office365\\inscriptions-fora-base-office365.txt");
+        Log.getInstance().generate(buildContent(inscriptionsForaDaBaseOffice365), "analise-inscriptions-office365" + File.separator + "inscriptions-fora-base-office365.txt");
     }
 
     private Set<Long> fileToSet(File file) throws IOException {

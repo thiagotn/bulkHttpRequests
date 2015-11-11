@@ -1,7 +1,5 @@
 target
-output
 scripts-old
-requests
 bulkHttpRequests
 *.class
 .classpath
