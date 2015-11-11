@@ -53,7 +53,7 @@ public class Log {
             String time = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss-SSS").format(new GregorianCalendar().getTime());
 
             String name = "request-" + time + "-status-" + statusCode + DEFAULT_EXTENSION;
-            File file = new File("output" + File.pathSeparator + name);
+            File file = new File("output" + File.separator + name);
 
             fileOutputStream = new FileOutputStream(file);
             IOUtils.copy(inputStream, fileOutputStream);
