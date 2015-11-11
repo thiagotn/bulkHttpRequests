@@ -14,7 +14,7 @@ Exemplo
 
 2 - Executar:
 
-	./bulkHttpRequests.sh
+	./bulkHttpRequests.sh requests
 
 
 3 - Visualizar resultados em /output
